@@ -8,9 +8,22 @@
 </head>
 <body>
   <h1 class="titulo">Lights Out</h1>
-  <div class="interfaz"></div>
-  <div class="record"></div>
-
+  <main class="pantalla">
+      <form action="">
+        <div>
+          <label for="nombre">Ingrese su nombre:</label>
+          <input type="text" id="nombre">
+        </div>
+        <div>
+          <label for="nivel">Ingrese la dificultad del nivel:</label>
+          <input type="number" id="nivel" value="3,4,5,7">
+        </div>
+      </form>
+    <div class="pantalla__juego">
+      <div class="juego-interfaz"></div>
+      <div class="juego-record">Tu record es ...</div>
+    </div>
+  </main>
 
   <script src="../model/LightsOut.js"></script>
   <script src="../presenter/presenter.js"></script>
