@@ -1,0 +1,16 @@
+.boton {
+  text-align: center;
+  border: 2px solid black;
+}
+.interfaz {
+  display: grid;
+  position: relative;
+  justify-content: center;
+  margin: auto;
+}
+.encendido {
+  background-color: green;
+}
+.apagado {
+  background-color: darkgreen;
+}
