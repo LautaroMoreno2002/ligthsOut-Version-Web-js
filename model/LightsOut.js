@@ -1,3 +1,4 @@
+"use strict";
 class LightOut {
 
   constructor() {
@@ -18,7 +19,6 @@ class LightOut {
     if (cantCeldas == 7) 
       this.tablero = [[],[],[],[],[],[],[]];
     this.iniciarlizarTablero (cantCeldas);
-    this.dibujarTablero ();
   }
   iniciarlizarTablero (cantCeldas) {
     for (let fila = 0; fila < cantCeldas; fila++){
@@ -36,26 +36,8 @@ class LightOut {
   cambiarEstadoDeCelda (fila, columna) {
     if (this.tablero[fila][columna] === true) 
       this.tablero[fila][columna] = false;
-    else this.tablero[fila][columna] = true;
+    else if (this.tablero[fila][columna] === false)
+      this.tablero[fila][columna] = true;
     return this.tablero[fila][columna];
   }
-  dibujarTablero () {
-    let contenedorInterfaz = document.querySelector('.interfaz');
-    contenedorInterfaz.style = `grid-template-rows: repeat(${this.tablero.length}, 100px); grid-template-columns: repeat(${this.tablero.length}, 100px);`;
-    /*grid-template-columns: repeat(3, 100px);
-    grid-template-rows: repeat(3, 100px);
-    */
-    for (let fila = 0; fila < this.tablero.length; fila++){
-      for (let columna = 0; columna < this.tablero.length; columna++) {
-        let boton = document.createElement('button');
-        boton.classList.add('boton');
-        contenedorInterfaz.appendChild(boton);
-      }
-    }
-  }
 }
-
-let juego = new LightOut();
-juego.crearTablero(3);
-console.log(juego.tablero);
-console.log(juego.verEstadoDeCelda(0,4),juego.cambiarEstadoDeCelda(0,4));
