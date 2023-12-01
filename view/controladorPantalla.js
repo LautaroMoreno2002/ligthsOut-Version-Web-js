@@ -27,16 +27,34 @@ const asignarEstado = (boton, estado) => {
     boton.classList.add('apagado');
 }
 const asignarEventos = (boton, fila, columna) => {
+  encenderYApagarBoton(boton, fila, columna);
+  pasarSobreUnBoton(boton, fila, columna);
+}
+const encenderYApagarBoton = (boton, fila, columna) => {
   boton.addEventListener('click', () => {
-   if (presenter.estaEncendido(fila, columna)){
-     presenter.cambiarEstado(fila, columna);
-     boton.classList.add('apagado');
-     boton.classList.remove('encendido');
-   } else {
-     presenter.cambiarEstado(fila, columna);
-     boton.classList.add('encendido');
-     boton.classList.remove('apagado');
-   }
+    if (presenter.estaEncendido(fila, columna)){
+      presenter.cambiarEstado(fila, columna);
+      boton.classList.add('apagado');
+      boton.classList.remove('encendido');
+    } else {
+      presenter.cambiarEstado(fila, columna);
+      boton.classList.add('encendido');
+      boton.classList.remove('apagado');
+    }
+   })
+}
+const pasarSobreUnBoton = (boton, fila, columna) => {
+  boton.addEventListener('mouseover', () => {
+    if (presenter.estaEncendido(fila, columna))
+      boton.classList.add('semiApagado')
+    else 
+      boton.classList.add('semiEncendido');
+  })
+  boton.addEventListener('mouseout', () => {
+    if (presenter.estaEncendido(fila, columna))
+      boton.classList.remove('semiApagado')
+    else 
+      boton.classList.remove('semiEncendido');
   })
 }
 
