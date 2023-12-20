@@ -1,61 +1,43 @@
 "use strict";
 
-let presenter = new Presenter();
+const presenter = new Presenter();
+const TAMANIO_TABLERO = presenter.tamanioTablero();
+const contenedorInterfaz = document.querySelector('.juego-interfaz');
 
+const estilizarTableroDeJuego = (contenedor) => {
+  contenedor.style = `grid-template-rows: repeat(${TAMANIO_TABLERO}, 75px); grid-template-columns: repeat(${TAMANIO_TABLERO}, 75px);`;
+}
 const dibujarTablero = () => {
-  let tablero = presenter.dameTablero();
-  console.log(tablero);
-  let contenedorInterfaz = document.querySelector('.juego-interfaz');
-  contenedorInterfaz.style = `grid-template-rows: repeat(${tablero.length}, 75px); grid-template-columns: repeat(${tablero.length}, 75px);`;
-  /*grid-template-columns: repeat(3, 100px);
-  grid-template-rows: repeat(3, 100px);
-  */
-  for (let fila = 0; fila < tablero.length; fila++){
-    for (let columna = 0; columna < tablero.length; columna++) {
-      let boton = document.createElement('button');
+  for (let fila = 0; fila < TAMANIO_TABLERO; fila++){
+    for (let columna = 0; columna < TAMANIO_TABLERO; columna++) {
+      const boton = document.createElement('button');
       boton.classList.add('boton');
-      asignarEstado(boton, tablero[fila][columna]);
+      asignarEstado(boton, fila, columna);
       asignarEventos(boton, fila, columna)
       contenedorInterfaz.appendChild(boton);
     }
   }
 }
-const asignarEstado = (boton, estado) => {
-  if (estado) 
+const asignarEstado = (boton, fila, columna) => {
+  if (presenter.estaEncendido(fila, columna)) 
     boton.classList.add('encendido');
   else 
     boton.classList.add('apagado');
 }
 const asignarEventos = (boton, fila, columna) => {
-  encenderYApagarBoton(boton, fila, columna);
-  pasarSobreUnBoton(boton, fila, columna);
+  encenderApagarBotones(boton, fila, columna);
 }
-const encenderYApagarBoton = (boton, fila, columna) => {
+const encenderApagarBotones = (boton, fila, columna) => {
   boton.addEventListener('click', () => {
-    if (presenter.estaEncendido(fila, columna)){
-      presenter.cambiarEstado(fila, columna);
-      boton.classList.add('apagado');
-      boton.classList.remove('encendido');
-    } else {
-      presenter.cambiarEstado(fila, columna);
-      boton.classList.add('encendido');
-      boton.classList.remove('apagado');
-    }
-   })
+    
+  });
 }
-const pasarSobreUnBoton = (boton, fila, columna) => {
-  boton.addEventListener('mouseover', () => {
+const encenderApagarBoton = (boton, fila, columna) => {
     if (presenter.estaEncendido(fila, columna))
-      boton.classList.add('semiApagado')
-    else 
-      boton.classList.add('semiEncendido');
-  })
-  boton.addEventListener('mouseout', () => {
-    if (presenter.estaEncendido(fila, columna))
-      boton.classList.remove('semiApagado')
-    else 
-      boton.classList.remove('semiEncendido');
-  })
+      boton.classList.replace('encendido','apagado');
+    else boton.classList.replace('apagado','encendido');
+    presenter.cambiarEstado(fila, columna);
 }
 
+estilizarTableroDeJuego(contenedorInterfaz);
 dibujarTablero();

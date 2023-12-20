@@ -4,9 +4,8 @@ class Presenter {
     this.lightsOut = new LightOut();
     this.lightsOut.crearTablero(7);
   }
-  dameTablero(){
-    console.log(this.lightsOut.tablero);
-    return this.lightsOut.tablero;
+  tamanioTablero(){
+    return this.lightsOut.largoDelTablero();
   }
   estaEncendido(fila, columna){
     return this.lightsOut.verEstadoDeCelda(fila, columna);

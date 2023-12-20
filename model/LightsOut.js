@@ -40,4 +40,7 @@ class LightOut {
       this.tablero[fila][columna] = true;
     return this.tablero[fila][columna];
   }
+  largoDelTablero() {
+    return this.tablero.length;
+  }
 }
